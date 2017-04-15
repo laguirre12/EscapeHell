@@ -27,6 +27,10 @@
             <kind>1</kind>
             <string>/// Initialize Physics Variables
 
+attack_key = ord('K');
+hitbox_offset = 10;
+current_hitbox = noone;
+
 // grav (number, constant) - Player gravity
 grav = 0.4;
 
@@ -152,6 +156,36 @@ if (place_meeting(x, y+1, obj_solid)) {
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>/// Basic attack
+
+var attackKeyPressed = keyboard_check(attack_key);
+
+
+
+
+if (attackKeyPressed) {
+    current_hitbox = instance_create(x + hitbox_offset, y, obj_attack_hitbox);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>/// Platform physics
 
 var rkey = keyboard_check(ord("D"));
@@ -227,7 +261,6 @@ if (up_key &amp;&amp; dash_key &amp;&amp; !place_meeting(x, y+1, obj_solid)) {
     }
 }
 
-show_debug_message(hspd);
 
 // Check if player is not moving
 if ((!rkey &amp;&amp; !lkey) || (rkey &amp;&amp; lkey)) {

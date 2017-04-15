@@ -25,7 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>jump_strength = 300;
+            <string>event_inherited();
+
+health = 1;
+jump_strength = 300;
 speed_x = 100;
 phy_fixed_rotation = true;
 </string>
@@ -50,7 +53,9 @@ phy_fixed_rotation = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var player_pos_x;
+            <string>event_inherited();
+
+var player_pos_x;
 var player_pos_y;
 
 with (obj_player) {

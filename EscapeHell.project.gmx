@@ -13,6 +13,7 @@
       <sprite>sprites\spr_ground_enemy</sprite>
       <sprite>sprites\spr_flying_enemy</sprite>
     </sprites>
+    <sprite>sprites\hitbox</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -25,6 +26,7 @@
       <object>objects\obj_ground_enemy</object>
       <object>objects\obj_flying_enemy</object>
     </objects>
+    <object>objects\obj_attack_hitbox</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_test</room>
