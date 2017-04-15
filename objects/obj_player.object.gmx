@@ -28,13 +28,13 @@
             <string>/// Initialize Physics Variables
 
 // grav (number, constant) - Player gravity
-grav = 0.5;
+grav = 0.4;
 
 // spd (number, constant) - Player Horizontal Moving Speed
 spd = 4;
 
 // jspd (number, constant) - Jump Speed
-jspd = 9;
+jspd = 7;
 
 // hspd (number, variable) - Horizontal Speed
 hspd = 0;
@@ -64,9 +64,43 @@ vspd = 0;
             <string>/// Initialize Movement Variables
 
 // Dash status
-
 can_dash = true;
 dash_cooldown = 30;
+is_dashing = false;
+
+// Up Dash status
+can_up_dash = true;
+up_dash_cooldown = 20;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Reset up-dash cooldown
+
+if (place_meeting(x, y + 1, obj_solid)) {
+    can_up_dash = true;
+} else {
+    alarm[1] = 1;
+}
 </string>
           </argument>
         </arguments>
@@ -91,7 +125,11 @@ dash_cooldown = 30;
             <kind>1</kind>
             <string>/// Toggle dash
 
-can_dash = true;
+if (place_meeting(x, y+1, obj_solid)) {
+    can_dash = true;
+} else {
+    alarm[0] = 1;
+}
 </string>
           </argument>
         </arguments>
@@ -119,7 +157,7 @@ can_dash = true;
 var rkey = keyboard_check(ord("D"));
 var lkey = keyboard_check(ord("A"));
 var jkey = keyboard_check(vk_space);
-var dash_key = keyboard_check(ord("L"));
+var dash_key = keyboard_check_pressed(ord("L"));
 var up_key = keyboard_check(ord("W"));
 
 // Check for ground
@@ -146,7 +184,7 @@ if (rkey) {
             hspd += spd;
         }
     } else {
-        hspd -= spd/5;
+        hspd -= spd/10;
     }
     dash_direction = vk_right;
 }
@@ -160,7 +198,7 @@ if (lkey) {
             hspd -= spd;
         }
     } else {
-        hspd += spd/5;
+        hspd += spd/10;
     }
     dash_direction = vk_left;
 }
@@ -176,10 +214,16 @@ if (dash_key) {
         } else if (dash_direction == vk_left) {
             hspd = -20;
         }
+    }
+}
 
-        if (up_key) {
-            vspd = -10;
-        }
+// Up dashing
+
+if (up_key &amp;&amp; dash_key &amp;&amp; !place_meeting(x, y+1, obj_solid)) {
+    if (can_up_dash) {
+        can_up_dash = false;
+        alarm[1] = up_dash_cooldown;
+        vspd = -jspd * 1.5;
     }
 }
 
