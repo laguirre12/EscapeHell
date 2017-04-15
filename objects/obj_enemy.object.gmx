@@ -25,10 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>speed_x = 100;
-jump_strength = 100;
-phy_fixed_rotation = true;
-</string>
+            <string></string>
           </argument>
         </arguments>
       </action>
@@ -50,29 +47,7 @@ phy_fixed_rotation = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var player_pos_x;
-var player_pos_y;
-
-with (obj_player) {
-    player_pos_x = obj_player.x;
-    player_pos_y = obj_player.y;
-}
-
-var on_ground = false;
-if (place_meeting(x, y + 1, obj_solid)) {
-    on_ground = true;
-}
-
-if (player_pos_x &gt; x) {
-    phy_linear_velocity_x = speed_x;
-} else {
-    phy_linear_velocity_x = -speed_x;
-}
-
-if (on_ground &amp;&amp; place_meeting(x + phy_linear_velocity_x, y, obj_solid)) {
-    phy_linear_velocity_y = -jump_strength;
-}
-</string>
+            <string></string>
           </argument>
         </arguments>
       </action>
