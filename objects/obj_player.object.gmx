@@ -65,9 +65,8 @@ vspd = 0;
 
 // Dash status
 
-can_dash = false;
-dash_first_pressed = false;
-dash_direction = vk_right;
+can_dash = true;
+dash_cooldown = 30;
 </string>
           </argument>
         </arguments>
@@ -92,7 +91,7 @@ dash_direction = vk_right;
             <kind>1</kind>
             <string>/// Toggle dash
 
-can_dash = false;
+can_dash = true;
 </string>
           </argument>
         </arguments>
@@ -117,12 +116,11 @@ can_dash = false;
             <kind>1</kind>
             <string>/// Platform physics
 
-var rkey = keyboard_check(vk_right) || keyboard_check(ord("D"));
-var lkey = keyboard_check(vk_left) || keyboard_check(ord("A"));
-var jkey = keyboard_check(vk_up) || keyboard_check(vk_space);
-
-var rkey_pressed = keyboard_check_pressed(vk_right) || keyboard_check_pressed(ord("D"));
-var lkey_pressed = keyboard_check_pressed(vk_left) || keyboard_check_pressed(ord("A"));
+var rkey = keyboard_check(ord("D"));
+var lkey = keyboard_check(ord("A"));
+var jkey = keyboard_check(vk_space);
+var dash_key = keyboard_check(ord("L"));
+var up_key = keyboard_check(ord("W"));
 
 // Check for ground
 if (place_meeting(x, y+1, obj_solid)) {
@@ -150,18 +148,7 @@ if (rkey) {
     } else {
         hspd -= spd/5;
     }
-}
-
-if (rkey_pressed) {
-    if (!can_dash) {
-        can_dash = true;
-        alarm[0] = 30;
-        dash_direction = vk_right;
-    } else if (can_dash &amp;&amp; dash_direction == vk_right) {
-        hspd = 20;
-        show_debug_message("AA");
-        can_dash = false;
-    }
+    dash_direction = vk_right;
 }
 
 // Moving left
@@ -175,16 +162,24 @@ if (lkey) {
     } else {
         hspd += spd/5;
     }
+    dash_direction = vk_left;
 }
 
-if (lkey_pressed) {
-    if (!can_dash) {
-        can_dash = true;
-        alarm[0] = 30;
-        dash_direction = vk_left;
-    } else if (can_dash &amp;&amp; dash_direction == vk_left) {
-        hspd = -20;
+// Dashing
+
+if (dash_key) {
+    if (can_dash) {
         can_dash = false;
+        alarm[0] = dash_cooldown;
+        if (dash_direction == vk_right) {
+            hspd = 20;
+        } else if (dash_direction == vk_left) {
+            hspd = -20;
+        }
+        
+        if (up_key) {
+            vspd = -10;
+        }
     }
 }
 
@@ -215,6 +210,7 @@ if ((!rkey &amp;&amp; !lkey) || (rkey &amp;&amp; lkey)) {
     } else {
         hspd = 0;
     }
+    dash_direction = vk_control;
 }
 
 // Horizontal collisions
