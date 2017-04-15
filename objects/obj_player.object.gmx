@@ -338,9 +338,9 @@ if (place_meeting(x+hspd, y, obj_solid)) {
     }
 
     // wall jump
-    if ((rightDown or leftDown) and keyboard_check_released(vk_up)) {
+    if ((rightDown or leftDown) and keyboard_check_released(vk_space)) {
         vspd = -jspd;
-        hspd = -sign(hspd)*spd*10;
+        hspd = -sign(hspd)*spd*2;
     } else {
         hspd = 0;
     }
