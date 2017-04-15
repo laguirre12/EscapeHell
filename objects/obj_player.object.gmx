@@ -41,6 +41,11 @@ hspd = 0;
 
 // vspd (number, variable) - Vertical Speed
 vspd = 0;
+
+
+// stores whether the player has been holding down
+leftDown = false;
+rightDown = false;
 </string>
           </argument>
         </arguments>
@@ -69,8 +74,10 @@ var rkey = keyboard_check(vk_right) || keyboard_check(ord('D'));
 var lkey = keyboard_check(vk_left) || keyboard_check(ord('A'));
 var jkey = keyboard_check(vk_up) || keyboard_check(ord('W'));
 
+var onGround = place_meeting(x, y+1, obj_solid);
+
 // Check for ground
-if (place_meeting(x, y+1, obj_solid)) {
+if (onGround) {
     vspd = 0;
     
     // Jumping
@@ -105,7 +112,19 @@ if (place_meeting(x+hspd, y, obj_solid)) {
     while(!place_meeting(x+sign(hspd), y, obj_solid)) {
         x += sign(hspd);
     }
-    hspd = 0;
+
+    // wall jump
+    if ((rightDown or leftDown) and keyboard_check_released(vk_up)) {
+        vspd = -jspd;
+        hspd = -sign(hspd)*spd*10;
+    } else {
+        hspd = 0;
+    }
+    
+    // slow gravity
+    if (!onGround) {
+        vspd = min(2, vspd);
+    }
 }
 
 // Move horizontally
@@ -122,6 +141,11 @@ if (place_meeting(x, y+vspd, obj_solid)) {
 
 // Move hertically
 y += vspd;
+
+
+// store whether key is held down
+rightDown = rkey;
+leftDown = lkey;
 </string>
           </argument>
         </arguments>
