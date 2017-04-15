@@ -65,9 +65,9 @@ vspd = 0;
             <kind>1</kind>
             <string>/// Platform physics
 
-var rkey = keyboard_check(vk_right);
-var lkey = keyboard_check(vk_left);
-var jkey = keyboard_check(vk_up);
+var rkey = keyboard_check(vk_right) || keyboard_check(ord('D'));
+var lkey = keyboard_check(vk_left) || keyboard_check(ord('A'));
+var jkey = keyboard_check(vk_up) || keyboard_check(ord('W'));
 
 // Check for ground
 if (place_meeting(x, y+1, obj_solid)) {
