@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>curr_health = 1;
+</string>
           </argument>
         </arguments>
       </action>
@@ -47,7 +48,12 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>// Health
+if (curr_health &lt;= 0) {
+    instance_destroy();
+}
+
+</string>
           </argument>
         </arguments>
       </action>

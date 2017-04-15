@@ -27,14 +27,18 @@
             <kind>1</kind>
             <string>/// Initialize Physics Variables
 
+attack_key = ord('K');
+hitbox_offset = 10;
+current_hitbox = noone;
+
 // grav (number, constant) - Player gravity
-grav = 0.5;
+grav = 0.4;
 
 // spd (number, constant) - Player Horizontal Moving Speed
 spd = 4;
 
 // jspd (number, constant) - Jump Speed
-jspd = 9;
+jspd = 7;
 
 // hspd (number, variable) - Horizontal Speed
 hspd = 0;
@@ -46,6 +50,123 @@ vspd = 0;
 // stores whether the player has been holding down
 leftDown = false;
 rightDown = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Initialize Movement Variables
+
+// Dash status
+can_dash = true;
+dash_cooldown = 30;
+is_dashing = false;
+
+// Up Dash status
+can_up_dash = true;
+up_dash_cooldown = 20;
+
+// Skill
+can_use_skill = true;
+skill_cooldown = 10;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Reset skill cooldown
+
+can_use_skill = true;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Reset up-dash cooldown
+
+if (place_meeting(x, y + 1, obj_solid)) {
+    can_up_dash = true;
+} else {
+    alarm[1] = 1;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Toggle dash
+
+if (place_meeting(x, y+1, obj_solid)) {
+    can_dash = true;
+} else {
+    alarm[0] = 1;
+}
 </string>
           </argument>
         </arguments>
@@ -68,18 +189,51 @@ rightDown = false;
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>/// Basic attack
+
+var attackKeyPressed = keyboard_check(attack_key);
+
+
+
+
+if (attackKeyPressed) {
+    current_hitbox = instance_create(x + hitbox_offset, y, obj_attack_hitbox);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>/// Platform physics
 
-var rkey = keyboard_check(vk_right) || keyboard_check(ord('D'));
-var lkey = keyboard_check(vk_left) || keyboard_check(ord('A'));
-var jkey = keyboard_check(vk_up) || keyboard_check(ord('W'));
+var rkey = keyboard_check(ord("D"));
+var lkey = keyboard_check(ord("A"));
+var jkey = keyboard_check(vk_space);
+var dash_key = keyboard_check_pressed(ord("L"));
+var up_key = keyboard_check(ord("W"));
+var up_dash_key = keyboard_check_pressed(186);
 
 var onGround = place_meeting(x, y+1, obj_solid);
 
 // Check for ground
 if (onGround) {
     vspd = 0;
-    
+
     // Jumping
     if (jkey) {
          vspd = -jspd;
@@ -93,17 +247,87 @@ if (onGround) {
 
 // Moving right
 if (rkey) {
-    hspd = spd;
+    if (hspd &lt;= spd) {
+        if (abs(hspd - spd) &lt; spd) {
+            hspd = spd;
+        } else {
+            hspd += spd;
+        }
+    } else {
+        hspd -= spd/10;
+    }
+    dash_direction = vk_right;
 }
 
 // Moving left
 if (lkey) {
-    hspd = -spd;
+    if (hspd &gt;= -spd) {
+        if (abs(hspd + spd) &lt; spd) {
+            hspd = -spd;
+        } else {
+            hspd -= spd;
+        }
+    } else {
+        hspd += spd/10;
+    }
+    dash_direction = vk_left;
 }
+
+// Dashing
+
+if (dash_key) {
+    if (can_dash &amp;&amp; can_use_skill) {
+        can_use_skill = false;
+        alarm[2] = skill_cooldown;
+        can_dash = false;
+        alarm[0] = dash_cooldown;
+        if (dash_direction == vk_right) {
+            hspd = 20;
+        } else if (dash_direction == vk_left) {
+            hspd = -20;
+        }
+    }
+}
+
+// Up dashing
+
+if (up_dash_key &amp;&amp; !place_meeting(x, y+1, obj_solid)) {
+    if (can_up_dash &amp;&amp; can_use_skill) {
+        can_use_skill = false;
+        alarm[2] = skill_cooldown;
+        can_up_dash = false;
+        alarm[1] = up_dash_cooldown;
+        vspd = -jspd * 1.5;
+    }
+}
+
 
 // Check if player is not moving
 if ((!rkey &amp;&amp; !lkey) || (rkey &amp;&amp; lkey)) {
-    hspd = 0;
+    if (hspd &gt; 0) {
+        if (abs(hspd - spd/10) &lt; spd/10) {
+            hspd = 0;
+        } else {
+            if (hspd &gt; spd) {
+                hspd -= spd/5;
+            } else {
+                hspd -= spd/2;
+            }
+        }
+    } else if (hspd &lt; 0) {
+        if (abs(hspd + spd/10) &lt; spd/10) {
+            hspd = 0;
+        } else {
+            if (hspd &lt; spd) {
+                hspd += spd/5;
+            } else {
+                hspd += spd/2;
+            }
+        }
+    } else {
+        hspd = 0;
+    }
+    dash_direction = vk_control;
 }
 
 // Horizontal collisions
