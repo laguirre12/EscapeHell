@@ -45,6 +45,58 @@ vspd = 0;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Initialize Movement Variables
+
+// Dash status
+
+can_dash = false;
+dash_first_pressed = false;
+dash_direction = vk_right;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Toggle dash
+
+can_dash = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="0">
       <action>
@@ -65,9 +117,12 @@ vspd = 0;
             <kind>1</kind>
             <string>/// Platform physics
 
-var rkey = keyboard_check(vk_right);
-var lkey = keyboard_check(vk_left);
-var jkey = keyboard_check(vk_up);
+var rkey = keyboard_check(vk_right) || keyboard_check(ord("D"));
+var lkey = keyboard_check(vk_left) || keyboard_check(ord("A"));
+var jkey = keyboard_check(vk_up) || keyboard_check(vk_space);
+
+var rkey_pressed = keyboard_check_pressed(vk_right) || keyboard_check_pressed(ord("D"));
+var lkey_pressed = keyboard_check_pressed(vk_left) || keyboard_check_pressed(ord("A"));
 
 // Check for ground
 if (place_meeting(x, y+1, obj_solid)) {
@@ -86,17 +141,80 @@ if (place_meeting(x, y+1, obj_solid)) {
 
 // Moving right
 if (rkey) {
-    hspd = spd;
+    if (hspd &lt;= spd) {
+        if (abs(hspd - spd) &lt; spd) {
+            hspd = spd;
+        } else {
+            hspd += spd;
+        }
+    } else {
+        hspd -= spd/5;
+    }
+}
+
+if (rkey_pressed) {
+    if (!can_dash) {
+        can_dash = true;
+        alarm[0] = 30;
+        dash_direction = vk_right;
+    } else if (can_dash &amp;&amp; dash_direction == vk_right) {
+        hspd = 20;
+        show_debug_message("AA");
+        can_dash = false;
+    }
 }
 
 // Moving left
 if (lkey) {
-    hspd = -spd;
+    if (hspd &gt;= -spd) {
+        if (abs(hspd + spd) &lt; spd) {
+            hspd = -spd;
+        } else {
+            hspd -= spd;
+        }
+    } else {
+        hspd += spd/5;
+    }
 }
 
+if (lkey_pressed) {
+    if (!can_dash) {
+        can_dash = true;
+        alarm[0] = 30;
+        dash_direction = vk_left;
+    } else if (can_dash &amp;&amp; dash_direction == vk_left) {
+        hspd = -20;
+        can_dash = false;
+    }
+}
+
+show_debug_message(hspd);
+
 // Check if player is not moving
-if ((!rkey &amp;&amp; !lkey) || (rkey &amp;&amp; lkey)) {
-    hspd = 0;
+if ((!rkey &amp;&amp; !lkey) || (rkey &amp;&amp; lkey)) {  
+    if (hspd &gt; 0) {
+        if (abs(hspd - spd/10) &lt; spd/10) {
+            hspd = 0;
+        } else {
+            if (hspd &gt; spd) {
+                hspd -= spd/5;
+            } else {
+                hspd -= spd/2;
+            }
+        }
+    } else if (hspd &lt; 0) {
+        if (abs(hspd + spd/10) &lt; spd/10) {
+            hspd = 0;
+        } else {
+            if (hspd &lt; spd) {
+                hspd += spd/5;
+            } else {
+                hspd += spd/2;
+            }
+        }
+    } else {
+        hspd = 0;
+    }
 }
 
 // Horizontal collisions
