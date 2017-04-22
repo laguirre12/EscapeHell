@@ -35,8 +35,8 @@
     <object>objects\obj_head</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\boss</room>
     <room>rooms\room0</room>
+    <room>rooms\boss</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
