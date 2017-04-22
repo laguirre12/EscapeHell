@@ -27,10 +27,12 @@
             <kind>1</kind>
             <string>event_inherited();
 
-health = 1;
 jump_strength = 300;
 speed_x = 100;
 phy_fixed_rotation = true;
+
+attack_cooldown = 100;
+attack_cooldown_remaining = attack_cooldown;
 </string>
           </argument>
         </arguments>
@@ -77,6 +79,39 @@ if (player_pos_x &gt; x) {
 if (on_ground &amp;&amp; place_meeting(x + (phy_linear_velocity_x / 2.4), y, obj_solid)) {
     phy_linear_velocity_y = -jump_strength;
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Attack
+
+if (attack_cooldown_remaining &lt;= 0) {
+    attack_cooldown_remaining = attack_cooldown;
+    show_debug_message("Attacking");
+    if (place_meeting(x, y, obj_player)) {
+        with (obj_player) {
+            health_remaining -= 1;
+            show_debug_message(health_remaining);
+        }
+    }
+}
+attack_cooldown_remaining -= 1;
 </string>
           </argument>
         </arguments>
