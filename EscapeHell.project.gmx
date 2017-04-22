@@ -23,8 +23,8 @@
     <object>objects\obj_enemy_spawner</object>
     <objects name="enemies">
       <object>objects\obj_enemy</object>
-      <object>objects\obj_ground_enemy</object>
       <object>objects\obj_flying_enemy</object>
+      <object>objects\obj_ground_enemy</object>
     </objects>
     <object>objects\obj_attack_hitbox</object>
   </objects>

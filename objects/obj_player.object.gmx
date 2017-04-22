@@ -85,6 +85,31 @@ up_dash_cooldown = 20;
 can_use_skill = true;
 skill_cooldown = 10;
 
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Initialize Gameplay variables
+
+max_health = 10;
+health_remaining = max_health;
 facing_right = true;
 can_attack_cooldown = 10;
 can_attack_timer = can_attack_cooldown;
@@ -379,6 +404,31 @@ y += vspd;
 // store whether key is held down
 rightDown = rkey;
 leftDown = lkey;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Death
+
+if (health_remaining &lt;= 0) {
+    instance_destroy();
+}
 </string>
           </argument>
         </arguments>
