@@ -28,61 +28,21 @@
             <string>event_inherited();
 
 jump_strength = 300;
-speed_x = 100;
+speed_x = 140;
 phy_fixed_rotation = true;
 
 attack_cooldown = 100;
 attack_cooldown_remaining = attack_cooldown;
+is_moving_backwards = false;
+backwards_chance = 120; // 1 in 500 chance per frame
+backwards_max_duration = 15;
+backwards_curr_duration = backwards_max_duration;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
     <event eventtype="3" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>event_inherited();
-
-var player_pos_x;
-var player_pos_y;
-
-with (obj_player) {
-    player_pos_x = obj_player.x;
-    player_pos_y = obj_player.y;
-}
-
-var on_ground = false;
-if (place_meeting(x, y + 1, obj_solid)) {
-    on_ground = true;
-}
-
-if (player_pos_x &gt; x) {
-    phy_linear_velocity_x = speed_x;
-} else {
-    phy_linear_velocity_x = -speed_x;
-}
-
-if (on_ground &amp;&amp; place_meeting(x + (phy_linear_velocity_x / 2.4), y, obj_solid)) {
-    phy_linear_velocity_y = -jump_strength;
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -112,6 +72,71 @@ if (attack_cooldown_remaining &lt;= 0) {
     }
 }
 attack_cooldown_remaining -= 1;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Movement
+
+event_inherited();
+
+var player_pos_x;
+var player_pos_y;
+
+with (obj_player) {
+    player_pos_x = obj_player.x;
+    player_pos_y = obj_player.y;
+}
+
+var on_ground = false;
+if (place_meeting(x, y + 1, obj_solid)) {
+    on_ground = true;
+}
+
+if (random(backwards_chance) &gt; backwards_chance - 1) {
+    is_moving_backwards = true;
+    backwards_curr_duration = backwards_max_duration;
+} else {
+    backwards_curr_duration -= 1;
+    if (backwards_curr_duration &lt;= 0) {
+        is_moving_backwards = false;
+    }
+}
+if (is_moving_backwards) {
+    if (player_pos_x &gt; x) {
+        phy_linear_velocity_x = -speed_x;
+    } else {
+        phy_linear_velocity_x = +speed_x;
+    }
+} else {
+    if (player_pos_x &gt; x) {
+        phy_linear_velocity_x = speed_x;
+    } else {
+        phy_linear_velocity_x = -speed_x;
+    }
+}
+
+
+
+if (on_ground &amp;&amp; place_meeting(x + (phy_linear_velocity_x / 2.4), y, obj_solid)) {
+    phy_linear_velocity_y = -jump_strength;
+}
 </string>
           </argument>
         </arguments>
