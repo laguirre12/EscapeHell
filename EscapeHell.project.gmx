@@ -29,7 +29,7 @@
     <object>objects\obj_attack_hitbox</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\rm_test</room>
+    <room>rooms\room0</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

@@ -28,7 +28,7 @@
             <string>/// Initialize Physics Variables
 
 attack_key = ord('K');
-hitbox_offset = 10;
+hitbox_offset = 18;
 current_hitbox = noone;
 
 // grav (number, constant) - Player gravity
@@ -84,6 +84,10 @@ up_dash_cooldown = 20;
 // Skill
 can_use_skill = true;
 skill_cooldown = 10;
+
+facing_right = true;
+can_attack_cooldown = 10;
+can_attack_timer = can_attack_cooldown;
 </string>
           </argument>
         </arguments>
@@ -192,13 +196,16 @@ if (place_meeting(x, y+1, obj_solid)) {
             <string>/// Basic attack
 
 var attackKeyPressed = keyboard_check(attack_key);
-
-
-
-
-if (attackKeyPressed) {
-    current_hitbox = instance_create(x + hitbox_offset, y, obj_attack_hitbox);
+var dir = -1;
+if (facing_right) {
+    dir = 1;
 }
+if (attackKeyPressed &amp;&amp; can_attack_timer &lt;= 0) {
+    can_attack_timer = can_attack_cooldown;
+    current_hitbox = instance_create(x + (dir) * hitbox_offset, y, obj_attack_hitbox);
+}
+
+can_attack_timer -= 1;
 </string>
           </argument>
         </arguments>
@@ -247,6 +254,7 @@ if (onGround) {
 
 // Moving right
 if (rkey) {
+    facing_right = true;
     if (hspd &lt;= spd) {
         if (abs(hspd - spd) &lt; spd) {
             hspd = spd;
@@ -261,6 +269,7 @@ if (rkey) {
 
 // Moving left
 if (lkey) {
+    facing_right = false;
     if (hspd &gt;= -spd) {
         if (abs(hspd + spd) &lt; spd) {
             hspd = -spd;
