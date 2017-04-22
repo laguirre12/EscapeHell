@@ -82,6 +82,7 @@ rightDown = false;
 can_dash = true;
 dash_cooldown = 30;
 is_dashing = false;
+middle_of_dashing = false;
 
 // Up Dash status
 can_up_dash = true;
@@ -303,15 +304,15 @@ var up_dash_key = keyboard_check_pressed(186);
 
 var onGround = place_meeting(x, y+1, obj_solid);
 
-var moveOnGround = spd/10;
+var moveOnGround = spd/3;
 var moveOnAir = spd/2;
-var frictionOnGround = spd/10;
+var frictionOnGround = spd/3;
 var dragOnAir = spd/30;
-var frictionOnGroundNoKeys = spd/10;
+var frictionOnGroundNoKeys = spd/2;
 var dragOnAirNoKeys = spd/15;
 
 var wallJumpSpd = spd * 1.7;
-var dashSpd = 20;
+var dashSpd = spd * 4;
 var upDashSpd = jspd * 1.5;
 
 // Check for ground
