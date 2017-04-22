@@ -28,7 +28,7 @@
             <string>/// Initialize Physics Variables
 
 attack_key = ord('K');
-hitbox_offset = 10;
+hitbox_offset = 18;
 current_hitbox = noone;
 
 // grav (number, constant) - Player gravity
@@ -94,6 +94,33 @@ skill_cooldown = 10;
 // Wall Jump
 wall_jump_unstick = false;
 wall_jump_unstick_timer_started = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Initialize Gameplay Variables
+
+max_health = 10;
+health_remaining = max_health;
+facing_right = true;
+can_attack_cooldown = 10;
+can_attack_timer = can_attack_cooldown;
 </string>
           </argument>
         </arguments>
@@ -235,13 +262,16 @@ if (place_meeting(x, y+1, obj_solid)) {
             <string>/// Basic attack
 
 var attackKeyPressed = keyboard_check(attack_key);
-
-
-
-
-if (attackKeyPressed) {
-    current_hitbox = instance_create(x + hitbox_offset, y, obj_attack_hitbox);
+var dir = -1;
+if (facing_right) {
+    dir = 1;
 }
+if (attackKeyPressed &amp;&amp; can_attack_timer &lt;= 0) {
+    can_attack_timer = can_attack_cooldown;
+    current_hitbox = instance_create(x + (dir) * hitbox_offset, y, obj_attack_hitbox);
+}
+
+can_attack_timer -= 1;
 </string>
           </argument>
         </arguments>
@@ -301,6 +331,7 @@ if (onGround) {
 
 // Moving right
 if (rkey) {
+    facing_right = true;
     if (hspd &lt;= spd) {
         if (onGround) {
             hspd += moveOnGround;
@@ -313,6 +344,7 @@ if (rkey) {
 
 // Moving left
 if (lkey) {
+    facing_right = false;
     if (hspd &gt;= -spd) {
         if (onGround) {
             hspd -= moveOnGround;
@@ -357,7 +389,7 @@ if (place_meeting(x+1, y, obj_solid) || place_meeting(x-1, y, obj_solid)) {
     if (!onGround) {
         vspd = min(2, vspd);
     }
-    
+
     if (lkey &amp;&amp; place_meeting(x+1, y, obj_solid)) {
         if (!wall_jump_unstick) {
             hspd = 0;
@@ -382,7 +414,7 @@ if (place_meeting(x+1, y, obj_solid) || place_meeting(x-1, y, obj_solid)) {
         wall_jump_unstick_timer_started = false;
     }
 
-    
+
     if (keyboard_check_pressed(vk_space)) {
         vspd = -jspd;
         if (place_meeting(x+1, y, obj_solid)) {
@@ -437,12 +469,12 @@ if ((!rkey &amp;&amp; !lkey) || (rkey &amp;&amp; lkey)) {
         hspd = 0;
     }
     dash_direction = vk_control;
-    
+
     if (abs(hspd) &lt; 1) {
         hspd = 0;
     }
 }
-    
+
 // Move horizontally
 x += hspd;
 
@@ -460,6 +492,31 @@ y += vspd;
 
 show_debug_message(hspd);
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Death
+
+if (health_remaining &lt;= 0) {
+    instance_destroy();
+}
 </string>
           </argument>
         </arguments>

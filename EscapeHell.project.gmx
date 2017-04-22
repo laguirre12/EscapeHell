@@ -12,8 +12,11 @@
     <sprites name="enemies">
       <sprite>sprites\spr_ground_enemy</sprite>
       <sprite>sprites\spr_flying_enemy</sprite>
+      <sprite>sprites\spr_enemy_projectile</sprite>
     </sprites>
     <sprite>sprites\hitbox</sprite>
+    <sprite>sprites\spr_boss</sprite>
+    <sprite>sprites\spr_head</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -23,13 +26,17 @@
     <object>objects\obj_enemy_spawner</object>
     <objects name="enemies">
       <object>objects\obj_enemy</object>
-      <object>objects\obj_ground_enemy</object>
       <object>objects\obj_flying_enemy</object>
+      <object>objects\obj_enemy_projectile</object>
+      <object>objects\obj_ground_enemy</object>
     </objects>
     <object>objects\obj_attack_hitbox</object>
+    <object>objects\obj_boss</object>
+    <object>objects\obj_head</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\rm_test</room>
+    <room>rooms\boss</room>
+    <room>rooms\room0</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
