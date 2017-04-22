@@ -12,6 +12,7 @@
     <sprites name="enemies">
       <sprite>sprites\spr_ground_enemy</sprite>
       <sprite>sprites\spr_flying_enemy</sprite>
+      <sprite>sprites\spr_enemy_projectile</sprite>
     </sprites>
     <sprite>sprites\hitbox</sprite>
   </sprites>
@@ -25,6 +26,7 @@
       <object>objects\obj_enemy</object>
       <object>objects\obj_ground_enemy</object>
       <object>objects\obj_flying_enemy</object>
+      <object>objects\obj_enemy_projectile</object>
     </objects>
     <object>objects\obj_attack_hitbox</object>
   </objects>
