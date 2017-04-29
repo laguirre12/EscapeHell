@@ -435,22 +435,10 @@ if (place_meeting(x+1, y, obj_solid) || place_meeting(x-1, y, obj_solid)) {
 // Horizontal collisions
 // If the player is reaching a wall, x+1 until it reaches the edge
 if (place_meeting(x+hspd, y, obj_solid)) {
-    yplus = 0;
-    while(place_meeting(x+hspd, y-yplus, obj_solid) &amp;&amp; yplus &lt;= abs(1)) {
-        yplus += 1;
+    while(!place_meeting(x+sign(hspd), y, obj_solid)) {
+        x += sign(hspd);
     }
-    
-    if (place_meeting(x+hspd, y-yplus, obj_solid)) {
-        while(!place_meeting(x+sign(hspd), y, obj_solid)) {
-            x += sign(hspd);
-        }
-        can_dash = true;
-        can_up_dash = true;
-        hspd = 0;
-    } else {
-        y -= yplus;
-    }
-
+    hspd = 0;
 }
 
 
@@ -488,7 +476,7 @@ if ((!rkey &amp;&amp; !lkey) || (rkey &amp;&amp; lkey)) {
     }
     dash_direction = vk_control;
 
-    if (abs(hspd) &lt; 2) {
+    if (abs(hspd) &lt; 1) {
         hspd = 0;
     }
     image_speed = 0;
@@ -500,7 +488,6 @@ x += hspd;
 // Vertical collisions
 // If the player is reaching a wall, y+1 until it reaches the edge
 if (place_meeting(x, y+vspd, obj_solid)) {
-
     while(!place_meeting(x, y+sign(vspd), obj_solid)) {
         y += sign(vspd);
     }
