@@ -99,21 +99,20 @@
     <instance objName="obj_solid" x="3746" y="1060" name="inst_F953A585" locked="0" code="" scaleX="15" scaleY="0.100000001490116" colour="4294967295" rotation="0"/>
     <instance objName="obj_solid" x="3763" y="1059" name="inst_DAC74E4A" locked="0" code="" scaleX="15" scaleY="0.100000001490116" colour="4294967295" rotation="0"/>
     <instance objName="obj_solid" x="3781" y="1058" name="inst_E599A0EC" locked="0" code="" scaleX="1" scaleY="0.100000001490116" colour="4294967295" rotation="0"/>
-    <instance objName="obj_solid" x="891" y="323" name="inst_FC7A501E" locked="0" code="" scaleX="41.875" scaleY="7.75" colour="4294967295" rotation="0"/>
-    <instance objName="obj_solid" x="1706" y="679" name="inst_A088308F" locked="0" code="" scaleX="41.6875" scaleY="7.8125" colour="4294967295" rotation="0"/>
-    <instance objName="&lt;undefined&gt;" x="0" y="0" name="" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_enemy_spawner" x="3392" y="944" name="inst_F992496C" locked="0" code="" scaleX="2.13333344459534" scaleY="2.02739715576172" colour="4294967295" rotation="0"/>
+    <instance objName="obj_solid" x="891" y="323" name="inst_FC7A501E" locked="0" code="" scaleX="43" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_solid" x="1706" y="679" name="inst_A088308F" locked="0" code="" scaleX="43" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_enemy_spawner" x="3440" y="944" name="inst_F992496C" locked="0" code="" scaleX="2.13333344459534" scaleY="2.02739715576172" colour="4294967295" rotation="0"/>
     <instance objName="obj_ground_enemy" x="2816" y="944" name="inst_4526C0B5" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_ground_enemy" x="3120" y="944" name="inst_F1FDA120" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_ground_enemy" x="3888" y="928" name="inst_519231C1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_flying_enemy" x="3440" y="224" name="inst_EC2ACB14" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_flying_enemy" x="4144" y="272" name="inst_030C7BD9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_flying_enemy" x="4688" y="208" name="inst_5591A8DD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_solid" x="2592" y="464" name="inst_CCC387D6" locked="0" code="" scaleX="32" scaleY="7" colour="4294967295" rotation="0"/>
-    <instance objName="obj_solid" x="4032" y="528" name="inst_0CAAB323" locked="0" code="" scaleX="31" scaleY="6" colour="4294967295" rotation="0"/>
-    <instance objName="obj_solid" x="4576" y="720" name="inst_4DDA52AC" locked="0" code="" scaleX="37" scaleY="7" colour="4294967295" rotation="0"/>
-    <instance objName="obj_solid" x="5520" y="320" name="inst_F10F1C13" locked="0" code="" scaleX="40" scaleY="7" colour="4294967295" rotation="0"/>
-    <instance objName="obj_solid" x="6384" y="608" name="inst_F8DFF7A4" locked="0" code="" scaleX="22" scaleY="9" colour="4294967295" rotation="0"/>
+    <instance objName="obj_solid" x="2592" y="480" name="inst_CCC387D6" locked="0" code="" scaleX="32" scaleY="2" colour="4294967295" rotation="0"/>
+    <instance objName="obj_solid" x="4032" y="528" name="inst_0CAAB323" locked="0" code="" scaleX="31" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_solid" x="4576" y="720" name="inst_4DDA52AC" locked="0" code="" scaleX="36" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_solid" x="5520" y="320" name="inst_F10F1C13" locked="0" code="" scaleX="39" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_solid" x="6384" y="608" name="inst_F8DFF7A4" locked="0" code="" scaleX="21" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_solid" x="7024" y="1072" name="inst_E37599B0" locked="0" code="" scaleX="237" scaleY="8" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
