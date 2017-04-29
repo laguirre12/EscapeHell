@@ -110,7 +110,9 @@ alarm[0] = room_speed;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited();
+            <string>/// move horizontally
+
+event_inherited();
 
 if (moving_to_max) {
     x = x + move_speed;

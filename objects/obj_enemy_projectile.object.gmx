@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>self</parentName>
+  <parentName>obj_enemy</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -28,6 +28,7 @@
             <string>/// Initialize variables
 prevX = 0;
 prevY = 0;
+event_inherited();
 </string>
           </argument>
         </arguments>
@@ -76,7 +77,9 @@ if (phy_position_x &lt; 0 || phy_position_x &gt; room_width
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Check player collision
+            <string>/// Check collision
+
+event_inherited();
 
 if (collision_line(prevX, prevY, x, y, obj_player, false, false)) {
     with (obj_player) {

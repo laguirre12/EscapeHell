@@ -58,7 +58,7 @@ alarm[1] = room_speed * 1;
 
 // spawns at top right outside of view 
 var y_pos = view_yview[0] + 25;
-var x_pos = irandom_range(x- 100, x + 100);
+var x_pos = irandom_range(view_xview[0],  view_xview[0] + view_wview[0]);
 for (var i = 0; i &lt; flying_spawn_rate; i++) {
     instance_create(x_pos, y_pos, obj_flying_enemy);
 }
