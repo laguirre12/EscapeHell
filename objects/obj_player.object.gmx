@@ -33,10 +33,10 @@ current_hitbox = noone;
 image_speed = 0;
 
 // grav (number, constant) - Player gravity
-grav = 0.4;
+grav = 0.8;
 
 // spd (number, constant) - Player Horizontal Moving Speed
-spd = 25;
+spd = 20;
 
 // jspd (number, constant) - Jump Speed
 jspd = 15;
@@ -53,6 +53,8 @@ hacc = 0;
 // vacc (number, variable) - Vertical Acceleration
 vacc = 0;
 
+pastSpd1 = 0;
+pastSpd2 = 0;
 
 // stores whether the player has been holding down
 leftDown = false;
@@ -108,7 +110,7 @@ can_attack_timer = can_attack_cooldown;
 
 // Dash status
 can_dash = true;
-dash_cooldown = 30;
+dash_cooldown = 15;
 is_dashing = false;
 middle_of_dashing = false;
 
@@ -316,7 +318,7 @@ var dragOnAir = spd/30;
 var frictionOnGroundNoKeys = spd/2;
 var dragOnAirNoKeys = spd/15;
 
-var wallJumpSpd = spd * 1.7;
+var wallJumpSpd = spd * 2;
 var dashSpd = spd * 4;
 var upDashSpd = jspd * 1.5;
 
@@ -330,13 +332,14 @@ if (onGround) {
     }
 } else {
     // Gravity
-    if (vspd &lt; 10) {
+    if (vspd &lt; 30) {
         vspd += grav;
     }
 }
 
 // Moving right
 if (rkey) {
+    image_xscale = abs(image_xscale);
     facing_right = true;
     if (hspd &lt;= spd) {
         if (onGround) {
@@ -350,6 +353,7 @@ if (rkey) {
 
 // Moving left
 if (lkey) {
+    image_xscale = -(abs(image_xscale));
     facing_right = false;
     if (hspd &gt;= -spd) {
         if (onGround) {
@@ -400,7 +404,7 @@ if (place_meeting(x+1, y, obj_solid) || place_meeting(x-1, y, obj_solid)) {
         if (!wall_jump_unstick) {
             hspd = 0;
             if (!wall_jump_unstick_timer_started) {
-                alarm[3] = 10;
+                alarm[3] = 5;
                 wall_jump_unstick_timer_started = true;
             }
         } else {
@@ -410,7 +414,7 @@ if (place_meeting(x+1, y, obj_solid) || place_meeting(x-1, y, obj_solid)) {
         if (!wall_jump_unstick) {
             hspd = 0;
             if (!wall_jump_unstick_timer_started) {
-                alarm[3] = 10;
+                alarm[3] = 5;
                 wall_jump_unstick_timer_started = true;
             }
         } else {
@@ -435,10 +439,22 @@ if (place_meeting(x+1, y, obj_solid) || place_meeting(x-1, y, obj_solid)) {
 // Horizontal collisions
 // If the player is reaching a wall, x+1 until it reaches the edge
 if (place_meeting(x+hspd, y, obj_solid)) {
-    while(!place_meeting(x+sign(hspd), y, obj_solid)) {
-        x += sign(hspd);
+    yplus = 0;
+    while(place_meeting(x+hspd, y-yplus, obj_solid) &amp;&amp; yplus &lt;= abs(1)) {
+        yplus += 1;
     }
-    hspd = 0;
+    
+    if (place_meeting(x+hspd, y-yplus, obj_solid)) {
+        while(!place_meeting(x+sign(hspd), y, obj_solid)) {
+            x += sign(hspd);
+        }
+        can_dash = true;
+        can_up_dash = true;
+        hspd = 0;
+    } else {
+        y -= yplus;
+    }
+
 }
 
 
@@ -475,15 +491,26 @@ if ((!rkey &amp;&amp; !lkey) || (rkey &amp;&amp; lkey)) {
         hspd = 0;
     }
     dash_direction = vk_control;
-
-    if (abs(hspd) &lt; 1) {
+    
+    if (abs(hspd) &lt; 2) {
         hspd = 0;
     }
+    
+    if (hspd == -pastSpd1 &amp;&amp; abs(hspd) - abs(pastSpd1) &lt; 0.1) {
+        hspd = 0;
+    }
+    if (hspd == pastSpd2 &amp;&amp; abs(hspd) - abs(pastSpd2) &lt; 0.1) {
+        hspd = 0;
+    }
+    
     image_speed = 0;
 }
 
 // Move horizontally
+
 x += hspd;
+pastSpd2 = pastSpd1;
+pastSpd1 = hspd;
 
 // Vertical collisions
 // If the player is reaching a wall, y+1 until it reaches the edge
@@ -498,9 +525,11 @@ if (place_meeting(x, y+vspd, obj_solid)) {
 y += vspd;
 
 
-if (hspd != 0 &amp;&amp; vspd == 0) {
-    image_speed =  .75;
+if (hspd != 0 &amp;&amp; vspd == 0 &amp;&amp; !(!rkey &amp;&amp; !lkey) || (rkey &amp;&amp; lkey)) {
+    image_speed =  .4;
 }
+
+show_debug_message(vspd);
 </string>
           </argument>
         </arguments>
