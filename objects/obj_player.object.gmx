@@ -81,6 +81,12 @@ rightDown = false;
 
 max_health = 10;
 health_remaining = max_health;
+health_bar = instance_create(0, 0, obj_health);
+with (health_bar) {
+    max_health = 10;
+    cur_health = max_health;
+}
+
 facing_right = true;
 can_attack_cooldown = 10;
 can_attack_timer = can_attack_cooldown;
@@ -525,6 +531,7 @@ if (hspd != 0 &amp;&amp; vspd == 0) {
 
 if (health_remaining &lt;= 0) {
     instance_destroy();
+    game_end();
 }
 </string>
           </argument>
@@ -553,6 +560,42 @@ if (place_meeting(x, y, obj_head)) {
     health_remaining -= 5;
     show_debug_message(health_remaining);
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Draw self and draw health bar
+
+draw_self();
+
+// draw outline
+draw_set_color(c_black);
+draw_rectangle(view_xview[0], view_yview[0],
+    view_xview[0] + 200, view_yview[0] + 100, true);
+
+// draw health
+draw_set_color(c_green);
+draw_rectangle(view_xview[0], view_yview[0],
+    view_xview[0] + 200 / max_health * health_remaining,
+    view_yview[0] + 100, false);
 </string>
           </argument>
         </arguments>

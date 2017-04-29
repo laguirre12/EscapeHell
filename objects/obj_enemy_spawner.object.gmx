@@ -92,7 +92,7 @@ alarm[1] = room_speed * 10;
 var x_offset = sprite_get_width(spr_ground_enemy) / 2;
 var y_offset = sprite_get_height(spr_ground_enemy) / 2;
 for (var i = 0; i &lt; ground_spawn_rate; i++) {
-    instance_create(x + x_offset, y + y_offset, obj_ground_enemy);
+    instance_create(x - x_offset, y, obj_ground_enemy);
 }
 
 alarm[0] = room_speed * 3;

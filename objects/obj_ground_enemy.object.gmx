@@ -30,6 +30,7 @@
 jump_strength = 300;
 speed_x = 140;
 phy_fixed_rotation = true;
+image_speed = .5;
 
 attack_cooldown = 100;
 attack_cooldown_remaining = attack_cooldown;
@@ -132,11 +133,9 @@ if (is_moving_backwards) {
     }
 }
 
-
-
-if (on_ground &amp;&amp; place_meeting(x + (phy_linear_velocity_x / 2.4), y, obj_solid)) {
-    phy_linear_velocity_y = -jump_strength;
-}
+//if (on_ground &amp;&amp; place_meeting(x + (phy_linear_velocity_x / 2.4), y, obj_solid)) {
+//    phy_linear_velocity_y = -jump_strength;
+//}
 </string>
           </argument>
         </arguments>
@@ -177,9 +176,9 @@ if (on_ground &amp;&amp; place_meeting(x + (phy_linear_velocity_x / 2.4), y, obj
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
   <PhysicsShapePoints>
-    <point>0,0</point>
-    <point>16,0</point>
-    <point>16,16</point>
-    <point>0,16</point>
+    <point>32,64</point>
+    <point>272,64</point>
+    <point>272,240</point>
+    <point>32,240</point>
   </PhysicsShapePoints>
 </object>

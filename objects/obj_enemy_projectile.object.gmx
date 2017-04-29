@@ -83,6 +83,7 @@ if (collision_line(prevX, prevY, x, y, obj_player, false, false)) {
         health_remaining -= 1;
     }
     show_debug_message("player hit");
+    instance_destroy();
 }
 
 prevX = x;
@@ -105,7 +106,7 @@ prevY = y;
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
   <PhysicsShapePoints>
-    <point>8,8</point>
-    <point>8,8</point>
+    <point>64,72</point>
+    <point>32,8</point>
   </PhysicsShapePoints>
 </object>
