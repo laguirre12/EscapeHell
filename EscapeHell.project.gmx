@@ -8,6 +8,7 @@
   <sprites name="sprites">
     <sprite>sprites\spr_player</sprite>
     <sprite>sprites\spr_solid</sprite>
+    <sprite>sprites\sprite9</sprite>
     <sprite>sprites\spr_enemy_spawner</sprite>
     <sprites name="enemies">
       <sprite>sprites\spr_ground_enemy</sprite>
@@ -18,7 +19,9 @@
     <sprite>sprites\spr_boss</sprite>
     <sprite>sprites\spr_head</sprite>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\background0</background>
+  </backgrounds>
   <paths name="paths"/>
   <objects name="objects">
     <object>objects\obj_player</object>
@@ -36,8 +39,8 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\test_room</room>
-    <room>rooms\room0</room>
     <room>rooms\boss</room>
+    <room>rooms\room0</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
