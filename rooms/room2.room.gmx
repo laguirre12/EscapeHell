@@ -41,7 +41,7 @@
     <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
   </backgrounds>
   <views>
-    <view visible="-1" objName="obj_player" xview="0" yview="0" wview="1600" hview="1200" xport="0" yport="0" wport="1600" hport="1200" hborder="700" vborder="32" hspeed="-1" vspeed="-1"/>
+    <view visible="-1" objName="obj_player" xview="0" yview="0" wview="1600" hview="1200" xport="0" yport="0" wport="1600" hport="1200" hborder="800" vborder="600" hspeed="-1" vspeed="-1"/>
     <view visible="0" objName="&lt;undefined&gt;" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
     <view visible="0" objName="&lt;undefined&gt;" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
     <view visible="0" objName="&lt;undefined&gt;" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
@@ -101,7 +101,20 @@
     <instance objName="obj_solid" x="3781" y="1058" name="inst_E599A0EC" locked="0" code="" scaleX="1" scaleY="0.100000001490116" colour="4294967295" rotation="0"/>
     <instance objName="obj_solid" x="891" y="323" name="inst_FC7A501E" locked="0" code="" scaleX="41.875" scaleY="7.75" colour="4294967295" rotation="0"/>
     <instance objName="obj_solid" x="1706" y="679" name="inst_A088308F" locked="0" code="" scaleX="41.6875" scaleY="7.8125" colour="4294967295" rotation="0"/>
->>>>>>> b1951a5407587d667657ed900c7cb48c6cfb68e0
+    <instance objName="&lt;undefined&gt;" x="0" y="0" name="" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_enemy_spawner" x="3392" y="944" name="inst_F992496C" locked="0" code="" scaleX="2.13333344459534" scaleY="2.02739715576172" colour="4294967295" rotation="0"/>
+    <instance objName="obj_ground_enemy" x="2816" y="944" name="inst_4526C0B5" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_ground_enemy" x="3120" y="944" name="inst_F1FDA120" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_ground_enemy" x="3888" y="928" name="inst_519231C1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_flying_enemy" x="3440" y="224" name="inst_EC2ACB14" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_flying_enemy" x="4144" y="272" name="inst_030C7BD9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_flying_enemy" x="4688" y="208" name="inst_5591A8DD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_solid" x="2592" y="464" name="inst_CCC387D6" locked="0" code="" scaleX="32" scaleY="7" colour="4294967295" rotation="0"/>
+    <instance objName="obj_solid" x="4032" y="528" name="inst_0CAAB323" locked="0" code="" scaleX="31" scaleY="6" colour="4294967295" rotation="0"/>
+    <instance objName="obj_solid" x="4576" y="720" name="inst_4DDA52AC" locked="0" code="" scaleX="37" scaleY="7" colour="4294967295" rotation="0"/>
+    <instance objName="obj_solid" x="5520" y="320" name="inst_F10F1C13" locked="0" code="" scaleX="40" scaleY="7" colour="4294967295" rotation="0"/>
+    <instance objName="obj_solid" x="6384" y="608" name="inst_F8DFF7A4" locked="0" code="" scaleX="22" scaleY="9" colour="4294967295" rotation="0"/>
+    <instance objName="obj_solid" x="7024" y="1072" name="inst_E37599B0" locked="0" code="" scaleX="237" scaleY="8" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>-1</PhysicsWorld>
