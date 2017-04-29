@@ -29,12 +29,13 @@
       <object>objects\obj_flying_enemy</object>
       <object>objects\obj_enemy_projectile</object>
       <object>objects\obj_ground_enemy</object>
+      <object>objects\obj_head</object>
+      <object>objects\obj_boss</object>
     </objects>
     <object>objects\obj_attack_hitbox</object>
-    <object>objects\obj_boss</object>
-    <object>objects\obj_head</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\test_room</room>
     <room>rooms\room0</room>
     <room>rooms\boss</room>
   </rooms>

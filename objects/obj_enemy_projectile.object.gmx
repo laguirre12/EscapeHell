@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>self</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -79,7 +79,9 @@ if (phy_position_x &lt; 0 || phy_position_x &gt; room_width
             <string>/// Check player collision
 
 if (collision_line(prevX, prevY, x, y, obj_player, false, false)) {
-    //TODO: subtract from players health
+    with (obj_player) {
+        health_remaining -= 1;
+    }
     show_debug_message("player hit");
 }
 

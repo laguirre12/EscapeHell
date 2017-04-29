@@ -54,6 +54,10 @@ row_head = true; // vs column head
 } else {
     y += spd;
 }
+
+if (x &lt; 0 || x &gt; room_width || y &lt; 0 || y &gt; room_height) {
+    instance_destroy();    
+}
 </string>
           </argument>
         </arguments>
